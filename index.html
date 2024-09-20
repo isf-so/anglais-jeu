@@ -4,55 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bienvenue en France - Le Restaurant</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .container {
-      background-color: white;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 20px;
-      width: 400px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      color: #333;
-    }
-    #score {
-      font-size: 1.2em;
-      margin-bottom: 20px;
-    }
-    .question {
-      margin: 20px 0;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      margin: 5px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-  </style>
+  <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
 
   <div class="container">
     <h1>Bienvenue en France</h1>
-    <div id="score">Score : 0</div>
+    <hr>
+    <div id="score" class="score-box">Score : 0</div>
+    <hr>
     <div id="question-container" class="question"></div>
     <div id="answer-buttons"></div>
   </div>
@@ -131,7 +91,7 @@
       if (currentQuestionIndex < questions.length) {
         showQuestion(questions[currentQuestionIndex]);
       } else {
-        questionContainer.innerText = "Vous avez terminé !";
+        questionContainer.innerHTML = 'Vous avez terminé ! <a href="index.html">Recommencer</a>';
         answerButtons.innerHTML = ''; // No more buttons
       }
     }

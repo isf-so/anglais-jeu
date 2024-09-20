@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url("../img/pexels-pixabay-260922.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+  }
+
+  
+  .container {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    color: #333;
+  }
+  #score {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  .question {
+    margin: 20px 0;
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+
+
+
+  .score-box {
+    font-size: 24px;              /* Taille de la police */
+    font-weight: bold;            /* Police en gras */
+    color: #ffffff;               /* Couleur du texte (blanc) */
+    background-color: #FFD700;    /* Couleur de fond (or) */
+    padding: 10px 20px;           /* Espace interne (padding) */
+    border-radius: 8px;           /* Coins arrondis */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Ombre légère */
+    text-align: center;           /* Centrage du texte */
+    display: inline-block;        /* Bloque avec taille minimale */
+}
