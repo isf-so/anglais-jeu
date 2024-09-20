@@ -17,87 +17,172 @@
     <div id="answer-buttons"></div>
   </div>
 
-  <script>
-    const questions = [
-      {
-        question: "Vous êtes arrivé dans un restaurant français. Que devez-vous faire ?",
-        answers: [
-          { text: "Attendre le serveur", correct: true },
-          { text: "Vous asseoir sans attendre", correct: false }
-        ]
-      },
+<script>
 
+const questions = [
+  {
+    // 0
+    question: "You are invited to dinner at a typical restaurant in the north of France. Will you arrive on time?",
+    answers: [
+      { text: "Yes", correct: true, next: 1 },
+      { text: "No", correct: false, next: 2 }
+    ]
+  },
+  {
+    // 1
+    question: "When you arrive, no one is there. After 10 minutes, you see your friends. They walk towards you to greet you.",
+    answers: [
+      { text: "Continue", correct: true, next: 3 }
+    ]
+  },
+  {
+    // 2
+    question: "You arrive slightly late. You enter the restaurant and see your group of friends already seated. How do you greet them?",
+    answers: [
+      { text: "Greet with a kiss", correct: true, next: 4 },
+      { text: "Shake hands", correct: false, next: 5 }
+    ]
+  },
+  {
+    // 3
+    question: "Will you greet your friends with a kiss on the cheek?",
+    answers: [
+      { text: "Yes", correct: true, next: 4 },
+      { text: "No", correct: false, next: 5 }
+    ]
+  },
+  {
+    // 4
+    question: "Do you start the kiss on the right?",
+    answers: [
+      { text: "Yes", correct: true, next: 6 },
+      { text: "No", correct: false, next: 7 }
+    ]
+  },
+  {
+    // 5
+    question: "You try to shake hands, but your friends attempt to kiss. What happens?",
+    answers: [
+      { text: "Awkward moment", correct: true, next: 6 }
+    ]
+  },
+  {
+    // 6
+    question: "The waiter arrives. Do you want to order right away or wait a little?",
+    answers: [
+      { text: "Order right away", correct: true, next: 8 },
+      { text: "Wait a little", correct: false, next: 9 }
+    ]
+  },
+  {
+    // 7
+    question: "You start on the left, and you both struggle with the kiss. You sit down and start looking through the menu.",
+    answers: [
+      { text: "Continue", correct: true, next: 8 }
+    ]
+  },
+  {
+    // 8
+    question: "You order quickly. What do you choose?",
+    answers: [
+      { text: "A traditional dish", correct: true, next: 10 },
+      { text: "A weird dish", correct: false, next: 10 }
+    ]
+  },
+  {
+    // 9
+    question: "The waiter is slow to return, and your friends get impatient. Eventually, you all order together.",
+    answers: [
+      { text: "Continue", correct: true, next: 10 }
+    ]
+  },
+  {
+    // 10
+    question: "You start to feel comfortable. Do you want to put your elbows on the table?",
+    answers: [
+      { text: "Yes", correct: false, next: 11 },
+      { text: "No", correct: true, next: 12 }
+    ]
+  },
+  {
+    // 11
+    question: "You spread out your elbows and relax. Your friends tease you about table manners! How do you feel?",
+    answers: [
+      { text: "A bit uneasy", correct: true, next: 13 }
+    ]
+  },
+  {
+    // 12
+    question: "You keep your elbows close and rest your forearms on the table. Your friends compliment your good manners.",
+    answers: [
+      { text: "Continue", correct: true, next: 13 }
+    ]
+  },
+  {
+    // 13
+    question: "The toast arrives. Do you want to look everyone in the eyes?",
+    answers: [
+      { text: "Yes", correct: true, next: 14 },
+      { text: "No", correct: false, next: 15 }
+    ]
+  },
+  {
+    // 14
+    question: "You look everyone in the eyes and say 'Cheers!'. What happens?",
+    answers: [
+      { text: "Everyone laughs", correct: true, next: null },
+      { text: "It's awkward", correct: false, next: null }
+    ]
+  },
+  {
+    // 15
+    question: "You don't look everyone in the eyes. What effect does that have?",
+    answers: [
+      { text: "A superstition emerges", correct: true, next: null },
+      { text: "No one cares", correct: false, next: null }
+    ]
+  }
+];
 
+let currentQuestionIndex = 0;
+let score = 0;
 
-      {
-        question: "test ?",
-        answers: [
-          { text: "juste", correct: true },
-          { text: "faux", correct: false }
-        ]
-      },
+const questionContainer = document.getElementById('question-container');
+const answerButtons = document.getElementById('answer-buttons');
+const scoreDisplay = document.getElementById('score');
 
+function startGame() {
+  showQuestion(questions[currentQuestionIndex]);
+}
 
+function showQuestion(questionObj) {
+  questionContainer.innerText = questionObj.question;
+  answerButtons.innerHTML = ''; // Clear previous buttons
 
-      {
-        question: "Le serveur vous demande ce que vous voulez boire, que répondez-vous ?",
-        answers: [
-          { text: "Un café s'il vous plaît", correct: true },
-          { text: "Je n'en ai aucune idée", correct: false }
-        ]
-      },
-      {
-        question: "Le serveur vous apporte l'addition, que faites-vous ?",
-        answers: [
-          { text: "Vous payez et dites merci", correct: true },
-          { text: "Vous partez sans rien dire", correct: false }
-        ]
-      }
-    ];
+  questionObj.answers.forEach(answer => {
+    const button = document.createElement('button');
+    button.innerText = answer.text;
+    button.onclick = () => handleAnswer(answer.correct, answer.next);
+    answerButtons.appendChild(button);
+  });
+}
 
-    let currentQuestionIndex = 0;
-    let score = 0;
+function handleAnswer(isCorrect, nextIndex) {
+  score += isCorrect ? 10 : -5;
+  scoreDisplay.innerText = `Score: ${score}`;
+  currentQuestionIndex = nextIndex;
 
-    const questionContainer = document.getElementById('question-container');
-    const answerButtons = document.getElementById('answer-buttons');
-    const scoreDisplay = document.getElementById('score');
+  if (currentQuestionIndex !== null) {
+    showQuestion(questions[currentQuestionIndex]);
+  } else {
+    questionContainer.innerHTML = 'You have finished! <a href="index.html">Restart</a>';
+    answerButtons.innerHTML = ''; // No more buttons
+  }
+}
 
-    function startGame() {
-      showQuestion(questions[currentQuestionIndex]);
-    }
+startGame();
 
-    function showQuestion(questionObj) {
-      questionContainer.innerText = questionObj.question;
-      answerButtons.innerHTML = ''; // Clear previous buttons
-
-      questionObj.answers.forEach(answer => {
-        const button = document.createElement('button');
-        button.innerText = answer.text;
-        button.onclick = () => handleAnswer(answer.correct);
-        answerButtons.appendChild(button);
-      });
-    }
-
-    function handleAnswer(isCorrect) {
-      if (isCorrect) {
-        score += 10;
-      } else {
-        score -= 5;
-      }
-
-      scoreDisplay.innerText = `Score : ${score}`;
-      currentQuestionIndex++;
-
-      if (currentQuestionIndex < questions.length) {
-        showQuestion(questions[currentQuestionIndex]);
-      } else {
-        questionContainer.innerHTML = 'Vous avez terminé ! <a href="index.html">Recommencer</a>';
-        answerButtons.innerHTML = ''; // No more buttons
-      }
-    }
-
-    startGame();
-  </script>
+</script>
 
 </body>
 </html>
