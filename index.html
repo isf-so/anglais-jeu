@@ -1,103 +1,102 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bienvenue en France - Le Restaurant</title>
-  <link rel="stylesheet" href="styles/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue au Restaurant - Introduction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-image: url("img/dehors.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            backdrop-filter: blur(3px);
+            /* Effet de flou */
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 50px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        p {
+            text-align: justify;
+        }
+
+        .rules {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 5px solid #4CAF50;
+            margin-top: 20px;
+        }
+
+        .start-button {
+            display: block;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px auto;
+            width: 200px;
+        }
+
+        .start-button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
+
 <body>
 
-  <div class="container">
-    <h1>Bienvenue en France</h1>
-    <hr>
-    <div id="score" class="score-box">Score : 0</div>
-    <hr>
-    <div id="question-container" class="question"></div>
-    <div id="answer-buttons"></div>
-  </div>
+    <div class="container">
+        <h1>Welcome to the Restaurant</h1>
 
-  <script>
-    const questions = [
-      {
-        question: "Vous êtes arrivé dans un restaurant français. Que devez-vous faire ?",
-        answers: [
-          { text: "Attendre le serveur", correct: true },
-          { text: "Vous asseoir sans attendre", correct: false }
-        ]
-      },
+        <p>
+            You are invited to dine at a typical restaurant in Mulhouse. The cobbled streets and Alsatian architecture
+            transport you to a time when simplicity and elegance were the order of the day.
+            You enter the restaurant, a warm place with red brick walls and carefully set tables. The delicate aroma of
+            regional dishes is already making your mouth water.
+        </p>
+
+        <p>
+            Tonight, it's a unique experience. You will discover French culinary culture and experience a true French
+            dinner. But beware, every detail matters in this type of restaurant!
+            Will you be able to follow the rules of etiquette and adopt the proper manners? Your choices will determine
+            the success of your dinner.
+        </p>
 
 
-
-      {
-        question: "test ?",
-        answers: [
-          { text: "juste", correct: true },
-          { text: "faux", correct: false }
-        ]
-      },
-
-
-
-      {
-        question: "Le serveur vous demande ce que vous voulez boire, que répondez-vous ?",
-        answers: [
-          { text: "Un café s'il vous plaît", correct: true },
-          { text: "Je n'en ai aucune idée", correct: false }
-        ]
-      },
-      {
-        question: "Le serveur vous apporte l'addition, que faites-vous ?",
-        answers: [
-          { text: "Vous payez et dites merci", correct: true },
-          { text: "Vous partez sans rien dire", correct: false }
-        ]
-      }
-    ];
-
-    let currentQuestionIndex = 0;
-    let score = 0;
-
-    const questionContainer = document.getElementById('question-container');
-    const answerButtons = document.getElementById('answer-buttons');
-    const scoreDisplay = document.getElementById('score');
-
-    function startGame() {
-      showQuestion(questions[currentQuestionIndex]);
-    }
-
-    function showQuestion(questionObj) {
-      questionContainer.innerText = questionObj.question;
-      answerButtons.innerHTML = ''; // Clear previous buttons
-
-      questionObj.answers.forEach(answer => {
-        const button = document.createElement('button');
-        button.innerText = answer.text;
-        button.onclick = () => handleAnswer(answer.correct);
-        answerButtons.appendChild(button);
-      });
-    }
-
-    function handleAnswer(isCorrect) {
-      if (isCorrect) {
-        score += 10;
-      } else {
-        score -= 5;
-      }
-
-      scoreDisplay.innerText = `Score : ${score}`;
-      currentQuestionIndex++;
-
-      if (currentQuestionIndex < questions.length) {
-        showQuestion(questions[currentQuestionIndex]);
-      } else {
-        questionContainer.innerHTML = 'Vous avez terminé ! <a href="index.html">Recommencer</a>';
-        answerButtons.innerHTML = ''; // No more buttons
-      }
-    }
-
-    startGame();
-  </script>
+        <div class="rules">
+            <h2>Game Rules</h2>
+            <ul>
+                <li>You will receive a series of questions at each stage of your dinner.</li>
+                <li>Each correct answer earns you <strong>10 points</strong>.</li>
+                <li>Each incorrect answer deducts <strong>5 points</strong>.</li>
+                <li>Your goal is to finish the dinner with the highest score possible.</li>
+                <li>The objective is to surpass your friend's score!</li>
+            </ul>
+        </div>
+        
+        <a href="jeu.html" class="start-button">PLAY</a>
+    </div>
 
 </body>
+
 </html>

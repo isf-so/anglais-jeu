@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenue en France - Le Restaurant</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Bienvenue en France</h1>
+    <hr>
+    <div id="score" class="score-box">Score : 0</div>
+    <hr>
+    <div id="question-container" class="question"></div>
+    <div id="answer-buttons"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Vous êtes arrivé dans un restaurant français. Que devez-vous faire ?",
+        answers: [
+          { text: "Attendre le serveur", correct: true },
+          { text: "Vous asseoir sans attendre", correct: false }
+        ]
+      },
+
+
+
+      {
+        question: "test ?",
+        answers: [
+          { text: "juste", correct: true },
+          { text: "faux", correct: false }
+        ]
+      },
+
+
+
+      {
+        question: "Le serveur vous demande ce que vous voulez boire, que répondez-vous ?",
+        answers: [
+          { text: "Un café s'il vous plaît", correct: true },
+          { text: "Je n'en ai aucune idée", correct: false }
+        ]
+      },
+      {
+        question: "Le serveur vous apporte l'addition, que faites-vous ?",
+        answers: [
+          { text: "Vous payez et dites merci", correct: true },
+          { text: "Vous partez sans rien dire", correct: false }
+        ]
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    const questionContainer = document.getElementById('question-container');
+    const answerButtons = document.getElementById('answer-buttons');
+    const scoreDisplay = document.getElementById('score');
+
+    function startGame() {
+      showQuestion(questions[currentQuestionIndex]);
+    }
+
+    function showQuestion(questionObj) {
+      questionContainer.innerText = questionObj.question;
+      answerButtons.innerHTML = ''; // Clear previous buttons
+
+      questionObj.answers.forEach(answer => {
+        const button = document.createElement('button');
+        button.innerText = answer.text;
+        button.onclick = () => handleAnswer(answer.correct);
+        answerButtons.appendChild(button);
+      });
+    }
+
+    function handleAnswer(isCorrect) {
+      if (isCorrect) {
+        score += 10;
+      } else {
+        score -= 5;
+      }
+
+      scoreDisplay.innerText = `Score : ${score}`;
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex < questions.length) {
+        showQuestion(questions[currentQuestionIndex]);
+      } else {
+        questionContainer.innerHTML = 'Vous avez terminé ! <a href="index.html">Recommencer</a>';
+        answerButtons.innerHTML = ''; // No more buttons
+      }
+    }
+
+    startGame();
+  </script>
+
+</body>
+</html>

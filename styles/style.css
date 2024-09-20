@@ -7,6 +7,8 @@ body {
     background-image: url("../img/pexels-pixabay-260922.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+    backdrop-filter: blur(3px); /* Effet de flou */
+
     margin: 0;
   }
 
