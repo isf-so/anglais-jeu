@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenue en France - Le Restaurant</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #333;
+    }
+    #score {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+    .question {
+      margin: 20px 0;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Bienvenue en France</h1>
+    <div id="score">Score : 0</div>
+    <div id="question-container" class="question"></div>
+    <div id="answer-buttons"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Vous êtes arrivé dans un restaurant français. Que devez-vous faire ?",
+        answers: [
+          { text: "Attendre le serveur", correct: true },
+          { text: "Vous asseoir sans attendre", correct: false }
+        ]
+      },
+
+
+
+      {
+        question: "test ?",
+        answers: [
+          { text: "juste", correct: true },
+          { text: "faux", correct: false }
+        ]
+      },
+
+
+
+      {
+        question: "Le serveur vous demande ce que vous voulez boire, que répondez-vous ?",
+        answers: [
+          { text: "Un café s'il vous plaît", correct: true },
+          { text: "Je n'en ai aucune idée", correct: false }
+        ]
+      },
+      {
+        question: "Le serveur vous apporte l'addition, que faites-vous ?",
+        answers: [
+          { text: "Vous payez et dites merci", correct: true },
+          { text: "Vous partez sans rien dire", correct: false }
+        ]
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    const questionContainer = document.getElementById('question-container');
+    const answerButtons = document.getElementById('answer-buttons');
+    const scoreDisplay = document.getElementById('score');
+
+    function startGame() {
+      showQuestion(questions[currentQuestionIndex]);
+    }
+
+    function showQuestion(questionObj) {
+      questionContainer.innerText = questionObj.question;
+      answerButtons.innerHTML = ''; // Clear previous buttons
+
+      questionObj.answers.forEach(answer => {
+        const button = document.createElement('button');
+        button.innerText = answer.text;
+        button.onclick = () => handleAnswer(answer.correct);
+        answerButtons.appendChild(button);
+      });
+    }
+
+    function handleAnswer(isCorrect) {
+      if (isCorrect) {
+        score += 10;
+      } else {
+        score -= 5;
+      }
+
+      scoreDisplay.innerText = `Score : ${score}`;
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex < questions.length) {
+        showQuestion(questions[currentQuestionIndex]);
+      } else {
+        questionContainer.innerText = "Vous avez terminé !";
+        answerButtons.innerHTML = ''; // No more buttons
+      }
+    }
+
+    startGame();
+  </script>
+
+</body>
+</html>
